@@ -57,8 +57,13 @@ permissions:
 
 jobs:
   beam_PreCommit_GoPortable:
-    name: beam_PreCommit_GoPortable Run GoPortable PreCommit
+    name: ${{ matrix.job_name }} (${{ matrix.job_phrase }})
     runs-on: [self-hosted, ubuntu-20.04, main]
+    strategy:
+      matrix:
+        job_name: [beam_PreCommit_GoPortable]
+        job_phrase: [Run GoPortable PreCommit]
+    strategy:
     timeout-minutes: 120
     if: |
       github.event_name == 'push' ||
