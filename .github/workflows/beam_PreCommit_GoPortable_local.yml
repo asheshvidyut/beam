@@ -40,4 +40,4 @@ jobs:
           go-version: '1.21'
           check-latest: true
       - name: Run goPortablePreCommit script
-        run: ./gradlew :goPortablePreCommit 
+        run: ./gradlew :goPortablePreCommit
