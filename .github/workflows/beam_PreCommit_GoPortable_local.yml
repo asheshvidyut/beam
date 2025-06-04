@@ -40,4 +40,4 @@ jobs:
           go-version: '1.21'
           check-latest: true
       - name: Run goPortablePreCommitLocal script
-        run: ./gradlew :goPortablePreCommit --max-workers=12 --continue -Dorg.gradle.jvmargs="-Xms2g -Xmx6g" -Dorg.gradle.vfs.watch=false -PpythonVersion=3.9
+        run: ./gradlew :goPortablePreCommit --max-workers=24 -PpythonVersion=3.9
