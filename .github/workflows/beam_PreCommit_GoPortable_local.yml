@@ -40,4 +40,7 @@ jobs:
           go-version: '1.21'
           check-latest: true
       - name: Run goPortablePreCommit script
+        env:
+          GRPC_ENABLE_FORK_SUPPORT: "0"
+          GRPC_POLL_STRATEGY: "poll"
         run: ./gradlew :goPortablePreCommit -PpythonVersion=3.9
