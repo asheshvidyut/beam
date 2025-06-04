@@ -1,0 +1,30 @@
+name: PreCommit GoPortable Local
+
+on:
+  workflow_dispatch:
+
+jobs:
+  beam_PreCommit_GoPortable:
+    name: beam_PreCommit_GoPortable Run GoPortable PreCommit
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup repository
+        uses: ./.github/actions/setup-action-local
+        with:
+          comment_phrase: "Run GoPortable PreCommit"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_job: "beam_PreCommit_GoPortable Run GoPortable PreCommit"
+      - name: Setup environment
+        uses: ./.github/actions/setup-environment-action
+        with:
+          python-version: default
+          java-version: default
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.21'
+          check-latest: true
+      - name: Run goPortablePreCommit script
+        run: ./gradlew :goPortablePreCommit 
