@@ -1,0 +1,26 @@
+name: 'Local Setup action'
+description: 'Setup repository for local testing'
+inputs:
+  comment_phrase:
+    description: "The comment phrase in the PR"
+    required: true
+  github_token:
+    description: "The GitHub token"
+    required: true
+  github_job:
+    description: "The GitHub job"
+    required: false
+    default: ''
+
+runs:
+  using: composite
+  steps:
+    - name: Setup for local testing
+      shell: bash
+      run: |
+        echo "Running in local mode - skipping PR checkout"
+        git config --global --add safe.directory /usr/local/google/home/asheshvidyut/beam
+    - name: expose gcloud path
+      shell: bash
+      run: |
+        echo KUBELET_GCLOUD_CONFIG_PATH=/var/lib/kubelet/pods/$POD_UID/volumes/kubernetes.io~empty-dir/gcloud >> $GITHUB_ENV 
