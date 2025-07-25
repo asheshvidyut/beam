@@ -40,4 +40,6 @@ jobs:
           go-version: '1.21'
           check-latest: true
       - name: Run goPortablePreCommitLocal script
+        env:
+          GRPC_EXPERIMENTS: event_engine_for_all_other_endpoints,event_engine_callback_cq,event_engine_client,event_engine_dns,event_engine_listener,event_engine_fork
         run: ./gradlew :goPortablePreCommit --max-workers=24 -PpythonVersion=3.9
