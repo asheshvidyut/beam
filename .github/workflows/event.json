@@ -1,0 +1,12 @@
+{
+  "workflow_dispatch": {},
+  "repository": {
+    "full_name": "apache/beam"
+  },
+  "ref": "refs/heads/debug",
+  "head_ref": "debug",
+  "base_ref": "master",
+  "comment": {
+    "body": ""
+  }
+}

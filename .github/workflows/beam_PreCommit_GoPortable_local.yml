@@ -1,0 +1,45 @@
+name: PreCommit GoPortable Local
+
+on:
+  workflow_dispatch:
+
+jobs:
+  beam_PreCommit_GoPortable:
+    name: beam_PreCommit_GoPortable Run GoPortable PreCommit
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup repository
+        uses: ./.github/actions/setup-action-local
+        with:
+          comment_phrase: "Run GoPortable PreCommit"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_job: "beam_PreCommit_GoPortable Run GoPortable PreCommit"
+      - name: Install Python and SSL dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y software-properties-common
+          sudo add-apt-repository -y ppa:deadsnakes/ppa
+          sudo apt-get update
+          sudo apt-get install -y python3.9 python3.9-dev python3.9-venv python3.9-distutils
+          sudo apt-get install -y libssl-dev openssl ca-certificates
+          sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.9 1
+          sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.9 1
+          curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+          python3.9 get-pip.py
+          python3.9 -m pip install --upgrade pip setuptools wheel
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '11'
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.21'
+          check-latest: true
+      - name: Run goPortablePreCommitLocal script
+        env:
+          GRPC_EXPERIMENTS: event_engine_for_all_other_endpoints,event_engine_callback_cq,event_engine_client,event_engine_dns,event_engine_listener,event_engine_fork
+        run: ./gradlew :goPortablePreCommit --max-workers=24 -PpythonVersion=3.9
