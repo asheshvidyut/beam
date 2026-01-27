@@ -367,7 +367,7 @@ if __name__ == '__main__':
           'fastavro>=0.23.6,<2',
           'fasteners>=0.3,<1.0',
           # TODO(https://github.com/grpc/grpc/issues/37710): Unpin grpc
-          'grpcio @ file:/usr/local/google/home/asheshvidyut/beam/sdks/python/grpcio-1.66.0.dev0-cp39-cp39-linux_x86_64.whl',
+          'grpcio @ file:/usr/local/google/home/asheshvidyut/beam/sdks/python/grpcio-1.79.0.dev0-cp39-cp39-linux_x86_64.whl',
           'hdfs>=2.1.0,<3.0.0',
           'httplib2>=0.8,<0.23.0',
           'jsonschema>=4.0.0,<5.0.0',

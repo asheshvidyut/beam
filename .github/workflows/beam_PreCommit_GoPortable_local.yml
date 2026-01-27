@@ -30,7 +30,7 @@ jobs:
           # CHANGE: Added --ignore-installed to bypass the corrupted uninstall
           python3.9 get-pip.py --ignore-installed
           # OPTIONAL: Added --ignore-installed here too for safety
-          python3.9 -m pip install --ignore-installed --upgrade pip setuptools wheel
+          python3.9 -m pip install --ignore-installed --upgrade pip setuptools wheel tomli
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
