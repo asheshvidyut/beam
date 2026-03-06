@@ -8,6 +8,8 @@ jobs:
     name: beam_PreCommit_GoPortable Run GoPortable PreCommit
     runs-on: ubuntu-latest
     timeout-minutes: 120
+    env:
+      GRPC_ENABLE_FORK_SUPPORT: "1"
     steps:
       - uses: actions/checkout@v4
       - name: Setup repository
